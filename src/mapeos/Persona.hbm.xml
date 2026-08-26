@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Persona" table="persona">
+		<id column="idPersona" name="idPersona">
+			<generator class="identity" />
+		</id>
+		<property column="dni" name="dni" type="int" />
+		<property column="nombre" name="nombre" type="string" />
+		<property column="apellido" name="apellido" type="string" />
+		<property column="fechaNacimiento" name="fechaNacimiento"
+			type="LocalDate" />
+		<property column="fechaIngreso" name="fechaIngreso"
+			type="LocalDate" />
+		<property column="sueldoBase" name="sueldoBase" type="float" />
+		<property column="fechaEgreso" name="fechaEgreso"
+			type="LocalDate" />
+		<many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta"
+			not-null="true"/>
+		<many-to-one name="festival" class="datos.Festival" column="idFestival"
+			not-null="true"/>
+		<joined-subclass name="datos.Cocinero" table="cocinero">
+			<key column="idCocinero" />
+			<property column="especialidad" name="especialidad" type="string" />
+			<property column="plusCategoria" name="plusCategoria" type="int" />
+		</joined-subclass>
+		<joined-subclass name="datos.Cajero" table="cajero">
+			<key column="idCajero" />
+			<property column="turno" name="turno" type="string" />
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
