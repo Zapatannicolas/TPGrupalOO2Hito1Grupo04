@@ -5,14 +5,16 @@ public class Plato {
 	private String nombre;
 	private float precio;
 	private float costo;
+	private UnidadVenta unidadVenta;
 	
 	public Plato() {
 	}
 	
-	public Plato(String nombre, float precio, float costo) {
+	public Plato(String nombre, float precio, float costo, UnidadVenta unidadVenta) {
 		this.nombre = nombre;
 		this.precio = precio;
 		this.costo = costo;
+		this.unidadVenta = unidadVenta;
 	}
 
 	public int getIdPlato() {
@@ -45,6 +47,14 @@ public class Plato {
 
 	public void setCosto(float costo) {
 		this.costo = costo;
+	}
+	
+	public UnidadVenta getUnidadVenta() {
+		return unidadVenta;
+	}
+
+	public void setUnidadVenta(UnidadVenta unidadVenta) {
+		this.unidadVenta = unidadVenta;
 	}
 
 	@Override

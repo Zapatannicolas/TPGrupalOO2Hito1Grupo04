@@ -17,5 +17,9 @@
         <property name="precio" column="precio" type="float" not-null="true"/>
         <property name="costo" column="costo" type="float" not-null="true"/>
 
+		<!-- Relacion con listas (otras clases) -->
+		<many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta"
+			not-null="false" />
+
     </class>
 </hibernate-mapping>

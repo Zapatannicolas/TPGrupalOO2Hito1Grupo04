@@ -55,7 +55,7 @@ public class TestGeneral {
 			e.printStackTrace();
 		}
 		
-		Plato plato1 = new Plato("panchoo", 20.00f, 12.000f);
+		Plato plato1 = new Plato("panchoo", 20.00f, 12.000f, abmUnidadVenta.traer(1));
 		
 		try {
 			abmPlato.agregar(plato1);
