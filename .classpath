@@ -5,7 +5,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/byte-buddy-1.10.7.jar"/>
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/classmate-1.5.1.jar"/>
@@ -25,5 +24,6 @@
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/mysql-connector-java-8.0.19.jar"/>
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/stax-ex-1.8.jar"/>
 	<classpathentry kind="lib" path="/Users/nicozpt/Desktop/Cosas Nico/Unla/OO2/lib/txw2-2.3.1.jar"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

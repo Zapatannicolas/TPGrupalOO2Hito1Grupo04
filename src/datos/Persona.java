@@ -2,6 +2,7 @@ package datos;
 
 import java.time.LocalDate;
 
+
 public abstract class Persona {
 	protected long idPersona;
 	protected int dni;
@@ -11,12 +12,15 @@ public abstract class Persona {
 	protected LocalDate fechaIngreso;
 	protected float sueldoBase;
 	protected LocalDate fechaEgreso;
+	private Festival festival;
+	private UnidadVenta unidadVenta;
+
 
 	public Persona() {
 	}
 
 	public Persona(int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso) throws Exception {
+			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -25,6 +29,7 @@ public abstract class Persona {
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
 		this.fechaEgreso = fechaEgreso;
+		this.festival = festival;
 	}
 
 	public long getIdPersona() {
@@ -94,6 +99,22 @@ public abstract class Persona {
 		this.fechaEgreso = fechaEgreso;
 	}
 	
+	public Festival getFestival() {
+	    return festival;
+	}
+
+	public void setFestival(Festival festival) {
+	    this.festival = festival;
+	}
+	
+	public UnidadVenta getUnidadVenta() {
+		return unidadVenta;
+	}
+
+	public void setUnidadVenta(UnidadVenta unidadVenta) {
+		this.unidadVenta = unidadVenta;
+	}
+
 	public boolean equals(Persona p) {
 		return dni == p.dni;
 	}

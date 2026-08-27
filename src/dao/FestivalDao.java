@@ -80,10 +80,8 @@ public class FestivalDao {
 		Festival objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Festival) session.createQuery(
-					"from Festival f where f.nombre=:nombre")
-					.setParameter("nombre", nombre)
-					.uniqueResult();
+			objeto = (Festival) session.createQuery("from Festival f where f.nombre=:nombre")
+					.setParameter("nombre", nombre).uniqueResult();
 		} finally {
 			session.close();
 		}
@@ -94,9 +92,7 @@ public class FestivalDao {
 		List<Festival> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery(
-					"from Festival f order by f.nombre asc",
-					Festival.class).getResultList();
+			lista = session.createQuery("from Festival f order by f.nombre asc", Festival.class).getResultList();
 		} finally {
 			session.close();
 		}
@@ -110,9 +106,7 @@ public class FestivalDao {
 
 			String hql = "from Festival f where f.id=:idFestival";
 
-			objeto = (Festival) session.createQuery(hql)
-					.setParameter("idFestival", idFestival)
-					.uniqueResult();
+			objeto = (Festival) session.createQuery(hql).setParameter("idFestival", idFestival).uniqueResult();
 
 			Hibernate.initialize(objeto.getUnidadesVenta());
 
@@ -129,9 +123,7 @@ public class FestivalDao {
 
 			String hql = "from Festival f where f.id=:idFestival";
 
-			objeto = (Festival) session.createQuery(hql)
-					.setParameter("idFestival", idFestival)
-					.uniqueResult();
+			objeto = (Festival) session.createQuery(hql).setParameter("idFestival", idFestival).uniqueResult();
 
 			Hibernate.initialize(objeto.getPedidos());
 

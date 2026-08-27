@@ -21,7 +21,8 @@ public class PersonaDao {
 	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		//throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		he.printStackTrace();
 	}
 	
 	public int agregar(Persona objeto) {

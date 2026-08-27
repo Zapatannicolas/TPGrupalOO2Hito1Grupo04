@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="datos.Pedido" table="pedido">
+
+        <!-- ID -->
+        <id name="idPedido" column="idPedido">
+            <generator class="identity"/>
+        </id>
+
+        <!-- Atributos - Columnas -->
+        <property name="fecha" column="fecha" type="LocalDate" not-null="true"/>
+        <property name="terminado" column="terminado" type="boolean" not-null="true"/>
+
+		<!-- Relacion Pedido N:1 con UnidadVenta -->
+		<many-to-one name="unidadVenta"
+             class="datos.UnidadVenta"
+             column="idUnidadVenta"
+             not-null="true"/>
+
+		<!-- Relacion Pedido N:1 con Festival -->
+		<many-to-one name="festival"
+             class="datos.Festival"
+             column="idFestival"
+             not-null="true"/>
+
+
+        <!-- Relación Pedido 1:N con ItemPedido  -->
+        <set name="items"
+             table="itemPedido"
+             inverse="true"
+             lazy="true"
+             fetch="select"
+             cascade="save-update">
+
+            <key column="idPedido" not-null="true"/>
+            <one-to-many class="datos.ItemPedido"/>
+        </set>
+       
+    </class>
+</hibernate-mapping>

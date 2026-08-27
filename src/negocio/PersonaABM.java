@@ -7,6 +7,7 @@ import dao.PersonaDao;
 import datos.Cajero;
 import datos.Cocinero;
 import datos.Persona;
+import datos.UnidadVenta;
 
 public class PersonaABM {
 	PersonaDao dao = new PersonaDao();
@@ -43,11 +44,6 @@ public class PersonaABM {
 	}
 
 	public void eliminar(long idPersona) throws Exception {
-		/*
-		 * En este caso la baja es física y sabemos que la entidad no tiene relaciones
-		 * pero en caso de tenerlas, hay que validar que el cliente no tenga
-		 * dependencias que generen errores al borrarlo.
-		 */
 		Persona p = dao.traer(idPersona);
 		if(dao.traer(idPersona) == null)throw new Exception("Esta persona no existe");
 		dao.eliminar(p);
@@ -75,4 +71,11 @@ public class PersonaABM {
         return (diasActual - diasIngreso) / 365;
 	}
 	
+	public void agregarPersonal(UnidadVenta unidadVenta, long idPersonal) throws Exception{
+		Persona persona = dao.traer(idPersonal);
+		
+		persona.setUnidadVenta(unidadVenta);
+		
+		dao.actualizar(persona);
+	}
 }

@@ -3,7 +3,6 @@ package datos;
 import java.time.LocalDate;
 
 public class Cocinero extends Persona{
-	private int idCocinero;
 	private String especialidad;
 	private int plusCategoria;
 	
@@ -12,18 +11,10 @@ public class Cocinero extends Persona{
 	}
 	
 	public Cocinero(String especialidad, int plusCategoria, int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso) throws Exception {
-		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso);
+			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
+		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso, festival);
 		this.especialidad = especialidad;
 		this.plusCategoria = plusCategoria;
-	}
-	
-	public int getIdCocinero() {
-		return idCocinero;
-	}
-
-	protected void setIdCocinero(int idCocinero) {
-		this.idCocinero = idCocinero;
 	}
 
 	public String getEspecialidad() {

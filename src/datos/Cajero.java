@@ -3,7 +3,6 @@ package datos;
 import java.time.LocalDate;
 
 public class Cajero extends Persona{
-	private int idCajero;
 	private String turno;
 	
 	public Cajero() {
@@ -11,20 +10,10 @@ public class Cajero extends Persona{
 
 
 	public Cajero(String turno, int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso) throws Exception {
-		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso);
+			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
+		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso, festival);
 		this.turno = turno;
 	}
-
-	public int getIdCajero() {
-		return idCajero;
-	}
-
-
-	protected void setIdCajero(int idCajero) {
-		this.idCajero = idCajero;
-	}
-
 
 	public String getTurno() {
 		return turno;

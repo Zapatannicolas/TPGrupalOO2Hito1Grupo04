@@ -1,6 +1,6 @@
 package negocio;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.FestivalDao;
@@ -18,7 +18,7 @@ public class FestivalABM {
 		return dao.traer(nombre);
 	}
 
-	public int agregar(String nombre, String temporada, Date fechaInicio, Date fechaFin) {
+	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
 		Festival f = new Festival();
 
 		f.setNombre(nombre);
