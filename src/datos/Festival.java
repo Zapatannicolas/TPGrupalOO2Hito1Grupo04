@@ -1,24 +1,36 @@
 package datos;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Set;
 
 public class Festival {
 	
 	private Long id;
     private String nombre;
     private String temporada;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
+    private Set<Persona> personas;
     private Set<UnidadVenta> unidadesVenta;
     private Set<Pedido> pedidos;
     
-    public Festival() {}
+    public Festival() {
+    	
+    }
+    
+	public Festival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
+		super();
+		this.nombre = nombre;
+		this.temporada = temporada;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	protected void setId(Long id) {
 		this.id = id;
 	}
 
@@ -38,19 +50,19 @@ public class Festival {
 		this.temporada = temporada;
 	}
 
-	public Date getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public LocalDate getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
 	}
     
@@ -70,6 +82,17 @@ public class Festival {
 	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+	public Set<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(Set<Persona> personas) {
+		this.personas = personas;
+	}
+	
+	//Hash
+	//Crear equals
 
 	@Override
 	public String toString() {

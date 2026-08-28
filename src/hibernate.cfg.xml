@@ -15,6 +15,12 @@
 		<property name="format_sql">true</property><!-- en true se ve mas legible el hql en consola-->
 
     <!--Mapeo Entidades   -->
-    <mapping resource="mapeos/Cliente.hbm.xml"/>
+    <mapping resource="mapeos/Festival.hbm.xml"/>
+    <mapping resource="mapeos/Persona.hbm.xml"/>
+    <mapping resource="mapeos/Pedido.hbm.xml"/>
+    <mapping resource="mapeos/Plato.hbm.xml"/>
+    <mapping resource="mapeos/ItemPedido.hbm.xml"/>
+    <mapping resource="mapeos/UnidadVenta.hbm.xml"/>
+    
   </session-factory>
 </hibernate-configuration>
