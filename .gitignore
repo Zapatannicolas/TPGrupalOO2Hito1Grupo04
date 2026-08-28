@@ -1,0 +1,27 @@
+# Java compiled output
+*.class
+
+# Application logs
+*.log
+
+# Java temporary files
+.mtj.tmp/
+
+# Java archive files
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash reports
+hs_err_pid*
+replay_pid*
+
+# Eclipse generated files
+bin/
+
+# macOS system files
+.DS_Store
