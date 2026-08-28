@@ -116,22 +116,4 @@ public class FestivalDao {
 		return objeto;
 	}
 	
-	//modificar
-
-	public Festival traerFestivalYPedidos(long idFestival) throws HibernateException {
-		Festival objeto = null;
-		try {
-			iniciaOperacion();
-
-			String hql = "from Festival f where f.id=:idFestival";
-
-			objeto = (Festival) session.createQuery(hql).setParameter("idFestival", idFestival).uniqueResult();
-
-			Hibernate.initialize(objeto.getPedidos());
-
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
 }
