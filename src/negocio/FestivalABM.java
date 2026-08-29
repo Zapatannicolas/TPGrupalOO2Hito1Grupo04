@@ -47,8 +47,4 @@ public class FestivalABM {
 	}
 
 	
-	//modificar
-	public Festival traerFestivalYPedidos(long id) {
-		return dao.traerFestivalYPedidos(id);
-	}
 }

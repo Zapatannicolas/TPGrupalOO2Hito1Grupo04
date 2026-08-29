@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 public class Festival {
@@ -10,9 +11,7 @@ public class Festival {
     private String temporada;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private Set<Persona> personas;
     private Set<UnidadVenta> unidadesVenta;
-    private Set<Pedido> pedidos;
     
     public Festival() {
     	
@@ -75,24 +74,25 @@ public class Festival {
 		this.unidadesVenta = unidadesVenta;
 	}
 
-	public Set<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(Set<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-	public Set<Persona> getPersonas() {
-		return personas;
-	}
-
-	public void setPersonas(Set<Persona> personas) {
-		this.personas = personas;
-	}
 	
-	//Hash
-	//Crear equals
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaFin, fechaInicio, id, nombre, temporada, unidadesVenta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Festival other = (Festival) obj;
+		return Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
+				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(temporada, other.temporada) && Objects.equals(unidadesVenta, other.unidadesVenta);
+	}
 
 	@Override
 	public String toString() {
