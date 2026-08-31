@@ -24,8 +24,6 @@ public class UnidadVentaDao{
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 	
-/*  LE HACEMOS EL NORMAL O PATRON SINGLETON??¿¿*/
-
 	public int agregar(UnidadVenta objeto) {
 		int id = 0;
 		try {
@@ -116,5 +114,20 @@ public class UnidadVentaDao{
         }
         return objeto;
     }
+    
+    public UnidadVenta traerUnidadVentaYStaff(long idUnidadVenta) throws HibernateException {
+        UnidadVenta objeto = null;
+        try {
+            iniciaOperacion();            
+            String hql = "from UnidadVenta u where u.idUnidadVenta=:idUnidadVenta";            
+            objeto=(UnidadVenta) session.createQuery(hql).setParameter("idUnidadVenta", idUnidadVenta).uniqueResult();
+            Hibernate.initialize(objeto.getStaff());
+        }
+ 		finally {
+ 			session.close();
+        }
+        return objeto;
+    }
+    
     
 }
