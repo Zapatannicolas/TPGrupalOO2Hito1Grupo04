@@ -27,7 +27,7 @@ public class TestGeneral {
 		PlatoABM abmPlato = new PlatoABM();
 		UnidadVentaAbm abmUnidadVenta = new UnidadVentaAbm();
 		
-		abmFestival.agregar("Cosquin Rock", "Primavera",LocalDate.of(2026, 8, 26), LocalDate.of(2026, 8, 27));
+		abmFestival.agregar("Cosquin Rock", "Primavera", LocalDate.of(2026, 8, 26), LocalDate.of(2026, 8, 27), 500.0, 50.0, 5000.0, 30000.0);
 		
 		try {
 			abmPersona.agregar(new Cajero("Noche",43389181, "Maximiliano", "Bruni", LocalDate.of(2001, 3, 30), 

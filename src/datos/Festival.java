@@ -11,6 +11,10 @@ public class Festival {
     private String temporada;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private double costoSuperficie;
+    private double costoMontaje;
+    private double plusElectricidad;
+    private double sueldoBase;
     private Set<UnidadVenta> unidadesVenta;
     
     public Festival() {
@@ -73,11 +77,46 @@ public class Festival {
 	public void setUnidadesVenta(Set<UnidadVenta> unidadesVenta) {
 		this.unidadesVenta = unidadesVenta;
 	}
+	
+	
+	public double getCostoSuperficie() {
+		return costoSuperficie;
+	}
+
+	public void setCostoSuperficie(double costoSuperficie) {
+		this.costoSuperficie = costoSuperficie;
+	}
+
+	public double getCostoMontaje() {
+		return costoMontaje;
+	}
+
+	public void setCostoMontaje(double costoMontaje) {
+		this.costoMontaje = costoMontaje;
+	}
+
+	public double getPlusElectricidad() {
+		return plusElectricidad;
+	}
+
+	public void setPlusElectricidad(double plusElectricidad) {
+		this.plusElectricidad = plusElectricidad;
+	}
+
+	public double getSueldoBase() {
+		return sueldoBase;
+	}
+
+	public void setSueldoBase(double sueldoBase) {
+		this.sueldoBase = sueldoBase;
+	}
 
 	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(fechaFin, fechaInicio, id, nombre, temporada, unidadesVenta);
+		return Objects.hash(Double.valueOf(costoMontaje), Double.valueOf(costoSuperficie), fechaFin, fechaInicio, id,
+				nombre, Double.valueOf(plusElectricidad), Double.valueOf(sueldoBase), temporada, unidadesVenta);
 	}
 
 	@Override
@@ -89,16 +128,22 @@ public class Festival {
 		if (getClass() != obj.getClass())
 			return false;
 		Festival other = (Festival) obj;
-		return Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
+		return Double.doubleToLongBits(costoMontaje) == Double.doubleToLongBits(other.costoMontaje)
+				&& Double.doubleToLongBits(costoSuperficie) == Double.doubleToLongBits(other.costoSuperficie)
+				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
 				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
+				&& Double.doubleToLongBits(plusElectricidad) == Double.doubleToLongBits(other.plusElectricidad)
+				&& Double.doubleToLongBits(sueldoBase) == Double.doubleToLongBits(other.sueldoBase)
 				&& Objects.equals(temporada, other.temporada) && Objects.equals(unidadesVenta, other.unidadesVenta);
 	}
 
 	@Override
 	public String toString() {
-		return "Festival [id=" + id + ", nombre=" + nombre
-				+ ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + "]";
+		return "Festival [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + ", costoSuperficie=" + costoSuperficie + ", costoMontaje=" + costoMontaje
+				+ ", plusElectricidad=" + plusElectricidad + ", sueldoBase=" + sueldoBase + "]";
 	}
+
+	
 
 }
