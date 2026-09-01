@@ -22,13 +22,6 @@
              column="idUnidadVenta"
              not-null="true"/>
 
-		<!-- Relacion Pedido N:1 con Festival -->
-		<many-to-one name="festival"
-             class="datos.Festival"
-             column="idFestival"
-             not-null="true"/>
-
-
         <!-- Relación Pedido 1:N con ItemPedido  -->
         <set name="items"
              table="itemPedido"
