@@ -19,7 +19,7 @@
 
 		<!-- Relacion con listas (otras clases) -->
 		<many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta"
-			not-null="false" />
+			not-null="true" />
 
     </class>
 </hibernate-mapping>
