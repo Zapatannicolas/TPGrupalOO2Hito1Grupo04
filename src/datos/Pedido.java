@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 public class Pedido {
@@ -9,16 +10,14 @@ public class Pedido {
 	private UnidadVenta unidadVenta;
 	private Set<ItemPedido> items;
 	private boolean terminado;
-	private Festival festival;
 	
 	public Pedido() {
 	}
 
 	// Constructor
-	public Pedido(LocalDate fecha, UnidadVenta unidadVenta, Festival festival) {
+	public Pedido(LocalDate fecha, UnidadVenta unidadVenta) {
 		this.fecha = fecha;
 		this.unidadVenta = unidadVenta;
-		this.festival = festival;
 	}
 
 	// Getters y Setters
@@ -61,13 +60,16 @@ public class Pedido {
 	public void setTerminado(boolean terminado) {
 		this.terminado = terminado;
 	}
+
 	
-	public Festival getFestival() {
-		return festival;
+	@Override
+	public int hashCode() {
+		return Objects.hash(fecha, Integer.valueOf(idPedido), items, Boolean.valueOf(terminado), unidadVenta);
 	}
 
-	public void setFestival(Festival festival) {
-		this.festival = festival;
+	// Equals
+	public boolean equals(Pedido pedido) {
+		return (pedido.getFecha().isEqual(this.fecha) && pedido.getUnidadVenta().equals(this.unidadVenta));
 	}
 
 	@Override
