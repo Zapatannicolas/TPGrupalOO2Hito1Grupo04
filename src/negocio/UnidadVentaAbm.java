@@ -1,11 +1,13 @@
 package negocio;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 import dao.UnidadVentaDao;
 import datos.UnidadVenta;
 import datos.Festival;
 import datos.FoodTruck;
+import datos.Pedido;
 import datos.Persona;
 import datos.PuestoDesarmable;
 
@@ -56,6 +58,28 @@ public class UnidadVentaAbm {
 		dao.eliminar(u);
 	}
 	
+	public void agregarStaffAUnidadVenta(UnidadVenta unidadVenta, Persona persona) throws Exception {
+	    if (unidadVenta == null) {
+	        throw new Exception("La Unidad de Venta no puede ser nula.");
+	    }
+	    if (persona == null) {
+	        throw new Exception("La Persona no puede ser nula.");
+	    }
+
+	    // Llamamos al DAO para que agregue a la lista en memoria y actualice la BD
+	    dao.agregarStaffAUnidadVenta(unidadVenta, persona);
+	}
+
+	public void agregarPedidosAUnidadVenta(UnidadVenta unidadVenta, Pedido pedido) throws Exception {
+	    if (unidadVenta == null) {
+	        throw new Exception("La Unidad de Venta no puede ser nula.");
+	    }
+	    if (pedido == null) {
+	        throw new Exception("El pedido no puede ser null.");
+	    }
+
+	    // Llamamos al DAO para que agregue a la lista en memoria y actualice la BD
+	    dao.agregarPedidosAUnidadVenta(unidadVenta, pedido);
+	}
 	
 }
-
