@@ -7,7 +7,6 @@ import dao.PersonaDao;
 import datos.Cajero;
 import datos.Cocinero;
 import datos.Persona;
-import datos.UnidadVenta;
 
 public class PersonaABM {
 	PersonaDao dao = new PersonaDao();
@@ -20,22 +19,24 @@ public class PersonaABM {
 			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String turno)throws Exception {
 		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
 		
-		//Por el momento no se va a hacer
-		//this.calcularSueldo(persona);
+		Persona cajero = new Cajero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, turno);
 		
-		return dao.agregar(new Cajero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
-				fechaEgreso, turno));
+		this.calcularSueldo(cajero);
+		
+		return dao.agregar(cajero);
 	}
 	
 	public int agregarCocinero(int dni, String nombre,  String apellido,  LocalDate fechaNacimiento, 
 			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String especialidad, int plusCategoria)throws Exception {
 		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
 		
-		//Por el momento no se va a hacer
-		//this.calcularSueldo(persona);
+		Persona cocinero = new Cocinero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, especialidad, plusCategoria);
 		
-		return dao.agregar(new Cocinero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
-				fechaEgreso, especialidad, plusCategoria));
+		this.calcularSueldo(cocinero);
+		
+		return dao.agregar(cocinero);
 	}
 	
 	private boolean validarDni(int dni) {
@@ -70,23 +71,25 @@ public class PersonaABM {
 		return dao.traerPersonaYUnidadDeVenta(idPersona);
 	}
 	
-//	private void calcularSueldo(Persona objeto) {
-//		
-//		if(objeto instanceof Cajero) {
-//			objeto.setSueldoBase(objeto.getSueldoBase() + (calcularAntiguedad(objeto)*5000));
-//		}else {
-//			Cocinero cocinero = (Cocinero) objeto;
-//			objeto.setSueldoBase(objeto.getSueldoBase() + cocinero.getPlusCategoria());  
-//		}
-//	}
-//	
-//	private float calcularAntiguedad(Persona objeto) {
-//		
-//		long diasIngreso = objeto.getFechaIngreso().toEpochDay();
-//        long diasActual = LocalDate.now().toEpochDay();
-//
-//        return (diasActual - diasIngreso) / 365;
-//	}
+	private void calcularSueldo(Persona objeto) {
+		
+		if(objeto instanceof Cajero) {
+			objeto.setSueldoBase(objeto.getSueldoBase() + (calcularAntiguedad(objeto)*5000));
+		}else {
+			Cocinero cocinero = (Cocinero) objeto;
+			objeto.setSueldoBase(objeto.getSueldoBase() + cocinero.getPlusCategoria());  
+		}
+	}
+	
+	
+	
+	private float calcularAntiguedad(Persona objeto) {
+		
+		long diasIngreso = objeto.getFechaIngreso().toEpochDay();
+        long diasActual = LocalDate.now().toEpochDay();
+
+        return (diasActual - diasIngreso) / 365;
+	}
 	
 	
 }

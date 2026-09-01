@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  	<class name="datos.UnidadVenta" table="unidadVenta">
+    	<!-- ID -->
+	    <id column="idUnidadVenta" name="idUnidadVenta">
+	      <generator class="identity"/>
+	    </id>
+	    <property name="nombreComercial" column="nombreComercial" type="string" not-null="true"/>
+	    <property name="superficie" column="superficie" type="double" not-null="true"/>
+	    <property name="codigoUnico" column="codigoUnico" type="string" not-null="true"/>
+
+		<!-- Relacion con listas (otras clases) -->
+        <one-to-one name="responsable" class="datos.Persona"></one-to-one>
+        
+        <set name="staff" table="persona" order-by="idPersona asc" inverse="true" lazy="true" fetch="select">
+	        <key column="idUnidadVenta" not-null="true"  />
+	        <one-to-many class="datos.Persona" />
+	    </set>
+	    
+        <set name="platos" table="plato" order-by="idPlato asc" inverse="true" lazy="true" fetch="select">
+	        <key column="idUnidadVenta" not-null="true"  />
+	        <one-to-many class="datos.Plato" />
+	    </set>
+
+        <set name="pedidos" table="pedido" order-by="idPedido asc" inverse="true" lazy="true" fetch="select">
+	        <key column="idUnidadVenta" not-null="true"  />
+	        <one-to-many class="datos.Pedido" />
+	    </set>
+
+		<!-- Sub clases heredadas -->
+
+	    <joined-subclass name="datos.FoodTruck" table="foodtruck">
+			<key column="idUnidadVenta" />
+			<property column="patente" name="patente" type="string" />
+			<property column="usaLuz" name="usaLuz" type="boolean" />
+        </joined-subclass>
+
+	    <joined-subclass name="datos.PuestoDesarmable" table="puestoDesarmable">
+			<key column="idUnidadVenta" />
+			<property column="cantidad" name="cantidad" type="int" />
+			<property column="tiempoMontaje" name="tiempoMontaje" type="int" />
+        </joined-subclass>
+       
+
+	    
+	</class>
+</hibernate-mapping>
+
+
