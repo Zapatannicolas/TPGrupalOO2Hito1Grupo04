@@ -1,48 +1,106 @@
 package negocio;
 	
 import java.util.List;
+
 import dao.PedidoDao;
+import dao.ItemPedidoDao;
+
 import datos.ItemPedido;
 import datos.Pedido;
 import datos.Plato;
 
 public class PedidoABM {
+	
 	PedidoDao dao = new PedidoDao();
+	ItemPedidoDao itemDao = new ItemPedidoDao();
 
 	public Pedido traer(int idPedido) {
 		return dao.traer(idPedido);
 	}
 
-	public int agregar(Pedido Pedido)throws Exception {
-		return dao.agregar(Pedido);
+	
+	public int agregar(Pedido pedido) throws Exception {
+
+		// Evitamos un NullPointerException.
+	    if (pedido == null) {
+	        throw new Exception("El pedido no existe");
+	    }
+
+	    if (pedido.getUnidadVenta() == null) {
+	        throw new Exception("La unidad de venta no existe");
+	    }
+
+	    return dao.agregar(pedido);
 	}
 
+	
 	public void modificar(Pedido pedido) throws Exception {
+		
+	    if (pedido == null) {
+	        throw new Exception("El pedido no existe");
+	    }
+
+	    if (dao.traer(pedido.getIdPedido()) == null) {
+	        throw new Exception("El pedido no existe");
+	    }
+
+	    if (pedido.getUnidadVenta() == null) {
+	        throw new Exception("La unidad de venta no existe");
+	    }
+		
 		dao.actualizar(pedido);
 	}
+	
 
 	public void eliminar(int idPedido) throws Exception {
 		Pedido p = dao.traer(idPedido);
+		
 			if(p == null)throw new Exception("Este pedido no existe");
 				dao.eliminar(p);
 		}
 
+	
 	public List<Pedido> traer() {
 		return dao.traer();
 	}
 	
 	
 	// Métodos itemPedido
-    public void agregarItem(Pedido pedido, Plato plato, int cantidad) throws Exception {
-    	ItemPedido item = new ItemPedido(plato, cantidad, pedido);
-        dao.agregarItem(item);
-    }
+	public void agregarItem(Pedido pedido, Plato plato, int cantidad) throws Exception {
+
+	    if (pedido == null) {
+	        throw new Exception("El pedido no existe");
+	    }
+
+	    if (plato == null) {
+	        throw new Exception("El plato no existe");
+	    }
+
+	    if (cantidad <= 0) {
+	        throw new Exception("La cantidad debe ser mayor a 0");
+	    }
+
+	    ItemPedido item = new ItemPedido(plato, cantidad, pedido);
+
+	    itemDao.agregar(item);
+	}
     
+	
     public void modificarItem(ItemPedido item) throws Exception {
-        dao.actualizarItem(item);
+    	
+        if (item == null) {
+            throw new Exception("El item no existe");
+        }
+    	
+        itemDao.actualizar(item);
     }
     
-    public void eliminarItem(Pedido pedido, ItemPedido item) throws Exception {
-        dao.eliminarItem(pedido, item);
+    public void eliminarItem(ItemPedido item) throws Exception {
+    	
+        if (item == null) {
+            throw new Exception("El item no existe");
+        }
+    	
+    	itemDao.eliminar(item);
     }
 }
