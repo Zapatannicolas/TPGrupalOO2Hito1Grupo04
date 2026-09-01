@@ -34,7 +34,8 @@ public class PedidoABM {
 	
 	// Métodos itemPedido
     public void agregarItem(Pedido pedido, Plato plato, int cantidad) throws Exception {
-        dao.agregarItem(pedido, plato, cantidad);
+    	ItemPedido item = new ItemPedido(plato, cantidad, pedido);
+        dao.agregarItem(item);
     }
     
     public void modificarItem(ItemPedido item) throws Exception {

@@ -10,9 +10,9 @@ public class Cocinero extends Persona{
 	public Cocinero() {
 	}
 	
-	public Cocinero(String especialidad, int plusCategoria, int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
-		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso, festival);
+	public Cocinero(int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
+			float sueldoBase, LocalDate fechaEgreso, String especialidad, int plusCategoria) throws Exception {
+		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso);
 		this.especialidad = especialidad;
 		this.plusCategoria = plusCategoria;
 	}

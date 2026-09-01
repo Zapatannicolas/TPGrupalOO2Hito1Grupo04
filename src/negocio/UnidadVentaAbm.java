@@ -12,26 +12,15 @@ public class UnidadVentaAbm {
 	
 	UnidadVentaDao dao = new UnidadVentaDao();
 
-	public int agregarFoodTruck(String nombreComercial, double superficie, String codigoUnico, Persona responsable, String patente, boolean usaLuz) throws Exception{
-		if(traer(codigoUnico)!= null) throw new Exception("Ya existe una unidad de venta con el mismo codigo");
-		UnidadVenta u = new FoodTruck(nombreComercial,superficie,codigoUnico,responsable,patente,usaLuz );
-	    return dao.agregar(u);
-	}
-
-	public int agregarPuestoDesarmable(String nombreComercial, double superficie, String codigoUnico, Persona responsable, int cantidad, int tiempoMontaje) throws Exception{
-		if(traer(codigoUnico)!= null) throw new Exception("Ya existe una unidad de venta con el mismo codigo");
-		UnidadVenta u = new PuestoDesarmable(nombreComercial,superficie,codigoUnico,responsable,cantidad,tiempoMontaje);
-	    return dao.agregar(u);
+	public int agregar(UnidadVenta objeto) throws Exception{
+		if(traer(objeto.getIdUnidadVenta())!= null) throw new Exception("Ya existe una unidad de venta con el mismo codigo");
+	    return dao.agregar(objeto);
 	}
 	
 	public UnidadVenta traer(long idUnidadVenta) {
 		return dao.traer(idUnidadVenta);
 	}
 
-	public UnidadVenta traer(String codigoUnico) {
-		return dao.traer(codigoUnico);
-	}
-	
 	public List<UnidadVenta> traer() {
 		return dao.traer();
 	}
@@ -41,7 +30,7 @@ public class UnidadVentaAbm {
 	}
 
 	public void modificar(UnidadVenta u) throws Exception{
-		UnidadVenta encontrada = traer(u.getCodigoUnico());
+		UnidadVenta encontrada = traer(u.getIdUnidadVenta());
 		if(encontrada !=null && encontrada.getIdUnidadVenta() != u.getIdUnidadVenta()) throw new Exception ("ERROR el codigo unico ya esta en uso");
 		dao.actualizar(u);
 	}

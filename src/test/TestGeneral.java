@@ -2,12 +2,10 @@ package test;
 
 import java.time.LocalDate;
 
-import datos.Cajero;
-import datos.Festival;
+import datos.FoodTruck;
 import datos.Pedido;
-import datos.Persona;
 import datos.Plato;
-import datos.UnidadVenta;
+import datos.PuestoDesarmable;
 import negocio.FestivalABM;
 import negocio.PedidoABM;
 import negocio.PersonaABM;
@@ -25,44 +23,46 @@ public class TestGeneral {
 		UnidadVentaAbm abmUnidadVenta = new UnidadVentaAbm();
 		
 		abmFestival.agregar("Cosquin Rock", "Primavera",LocalDate.of(2026, 8, 26), LocalDate.of(2026, 8, 27));
+		
 		try {
-			Persona cajero = new Cajero("Noche",43389181, "Maximiliano", "Bruni", LocalDate.of(2001, 3, 30), LocalDate.of(2020, 5, 21), 1500000f, LocalDate.of(2026, 8, 23), abmFestival.traer(1));
-			abmPersona.agregar(cajero);
+			abmPersona.agregarCajero(43389181, "Maximiliano", "Bruni", LocalDate.of(2001, 3, 30), 
+					LocalDate.of(2020, 5, 21), 1500000f, LocalDate.of(2026, 8, 23),"Noche");
+			abmPersona.agregarCocinero(38742121, "Francisco", "Jordans", 
+					LocalDate.of(1999, 3, 11), LocalDate.of(2020, 5, 20), 1500000f, LocalDate.of(2026, 8, 23), "Panchos", 1000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			abmUnidadVenta.agregarFoodTruck("dasd", 1.12, "sadasd", abmPersona.traer(1), "jeje", true);
+			abmUnidadVenta.agregar(new FoodTruck("El Buen Sabor", 18.5, "FT-2026-047", abmPersona.traer(1), "AB123CD", true));
+			abmUnidadVenta.agregar(new PuestoDesarmable("La Hamburgueseria", 20.5, "FT-4821", abmPersona.traer(2), 6, 45));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			abmPedido.agregar(new Pedido(LocalDate.of(2024, 2, 12), abmUnidadVenta.traer(1), abmFestival.traer(1)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			abmPlato.agregar(new Plato("Hamburguesa Completa", 8500.0f, 3200.0f, abmUnidadVenta.traer(1)));
+			abmPlato.agregar(new Plato("Pizza Especial", 12000.0f, 4500.0f, abmUnidadVenta.traer(2)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			abmPersona.agregarPersonal(abmUnidadVenta.traer(1), 1);
+			abmPedido.agregarItem(abmPedido.traer(1), abmPlato.traer(1), 3);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		Pedido pedido1 = new Pedido(LocalDate.of(2024, 2, 12), abmUnidadVenta.traer(1), abmFestival.traer(1));
-		
-		try {
-			abmPedido.agregar(pedido1);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Plato plato1 = new Plato("panchoo", 20.00f, 12.000f, abmUnidadVenta.traer(1));
-		
-		try {
-			abmPlato.agregar(plato1);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

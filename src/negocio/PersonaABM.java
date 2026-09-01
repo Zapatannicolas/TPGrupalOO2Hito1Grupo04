@@ -16,12 +16,26 @@ public class PersonaABM {
 		return dao.traer(idPersona);
 	}
 
-	public int agregar(Persona persona)throws Exception {
-		if(validarDni(persona.getDni()) == true)throw new Exception("Esta persona ya existe");
+	public int agregarCajero(int dni, String nombre,  String apellido,  LocalDate fechaNacimiento, 
+			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String turno)throws Exception {
+		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
 		
-		this.calcularSueldo(persona);
+		//Por el momento no se va a hacer
+		//this.calcularSueldo(persona);
 		
-		return dao.agregar(persona);
+		return dao.agregar(new Cajero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, turno));
+	}
+	
+	public int agregarCocinero(int dni, String nombre,  String apellido,  LocalDate fechaNacimiento, 
+			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String especialidad, int plusCategoria)throws Exception {
+		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
+		
+		//Por el momento no se va a hacer
+		//this.calcularSueldo(persona);
+		
+		return dao.agregar(new Cocinero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, especialidad, plusCategoria));
 	}
 	
 	private boolean validarDni(int dni) {
@@ -39,7 +53,6 @@ public class PersonaABM {
 	}
 
 	public void modificar(Persona persona) throws Exception {
-		if(validarDni(persona.getDni()) == true)throw new Exception("Esta persona ya existe");
 		dao.actualizar(persona);
 	}
 
@@ -53,29 +66,27 @@ public class PersonaABM {
 		return dao.traer();
 	}
 	
-	private void calcularSueldo(Persona objeto) {
-		
-		if(objeto instanceof Cajero) {
-			objeto.setSueldoBase(objeto.getSueldoBase() + (calcularAntiguedad(objeto)*5000));
-		}else {
-			Cocinero cocinero = (Cocinero) objeto;
-			objeto.setSueldoBase(objeto.getSueldoBase() + cocinero.getPlusCategoria());  
-		}
+	public Persona traerPersonaYUnidadDeVenta(long idPersona) {
+		return dao.traerPersonaYUnidadDeVenta(idPersona);
 	}
 	
-	private float calcularAntiguedad(Persona objeto) {
-		
-		long diasIngreso = objeto.getFechaIngreso().toEpochDay();
-        long diasActual = LocalDate.now().toEpochDay();
-
-        return (diasActual - diasIngreso) / 365;
-	}
+//	private void calcularSueldo(Persona objeto) {
+//		
+//		if(objeto instanceof Cajero) {
+//			objeto.setSueldoBase(objeto.getSueldoBase() + (calcularAntiguedad(objeto)*5000));
+//		}else {
+//			Cocinero cocinero = (Cocinero) objeto;
+//			objeto.setSueldoBase(objeto.getSueldoBase() + cocinero.getPlusCategoria());  
+//		}
+//	}
+//	
+//	private float calcularAntiguedad(Persona objeto) {
+//		
+//		long diasIngreso = objeto.getFechaIngreso().toEpochDay();
+//        long diasActual = LocalDate.now().toEpochDay();
+//
+//        return (diasActual - diasIngreso) / 365;
+//	}
 	
-	public void agregarPersonal(UnidadVenta unidadVenta, long idPersonal) throws Exception{
-		Persona persona = dao.traer(idPersonal);
-		
-		persona.setUnidadVenta(unidadVenta);
-		
-		dao.actualizar(persona);
-	}
+	
 }

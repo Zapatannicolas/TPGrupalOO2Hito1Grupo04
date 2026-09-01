@@ -30,7 +30,7 @@ public class Festival {
 		return id;
 	}
 
-	public void setId(Long id) {
+	protected void setId(Long id) {
 		this.id = id;
 	}
 
@@ -90,6 +90,9 @@ public class Festival {
 	public void setPersonas(Set<Persona> personas) {
 		this.personas = personas;
 	}
+	
+	//Hash
+	//Crear equals
 
 	@Override
 	public String toString() {

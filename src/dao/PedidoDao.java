@@ -90,12 +90,12 @@ public class PedidoDao {
 	
 	
 	// ItemPedidos
-	public void agregarItem(Pedido pedido, Plato plato, int cantidad) {
+	public int agregarItem(ItemPedido objeto) {
+		int id = 0;
 	    try {
 	        iniciaOperacion();
-	        ItemPedido item = new ItemPedido(plato, cantidad, pedido);
-	        pedido.getItems().add(item);
-	        session.update(pedido);
+	        id = Integer.parseInt(session.save(objeto).toString());
+	        session.update(objeto);
 	        tx.commit();
 	        
 	    } catch (HibernateException he) {
@@ -103,6 +103,7 @@ public class PedidoDao {
 	    } finally {
 	        session.close();
 	    }
+	    return id;
 	}
 	
 	public void actualizarItem(ItemPedido item) {

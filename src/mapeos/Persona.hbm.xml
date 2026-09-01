@@ -21,8 +21,7 @@
 			type="LocalDate" />
 
 		<!-- Relacion con listas (otras clases) -->
-		<many-to-one name="festival" class="datos.Festival" column="idFestival"
-			not-null="true" />
+		
 		<many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta"
 			not-null="false" />
 

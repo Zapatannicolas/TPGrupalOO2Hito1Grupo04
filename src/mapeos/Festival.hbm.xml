@@ -27,16 +27,7 @@
 			<key column="idFestival" />
 			<one-to-many class="datos.UnidadVenta" />
 		</set>
-
-		<set name="personas" table="personas">
-			<key column="idFestival"/>
-			<one-to-many class="datos.Persona" />
-		</set>
-		
-		<set name="pedidos" table="pedidos">
-			<key column="idFestival"/>
-			<one-to-many class="datos.Pedido" />
-		</set>
+	
 	</class>
 
 

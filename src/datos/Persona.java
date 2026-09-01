@@ -1,18 +1,18 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
-public abstract class Persona {
-	protected long idPersona;
-	protected int dni;
-	protected String nombre;
-	protected String apellido;
-	protected LocalDate fechaNacimiento;
-	protected LocalDate fechaIngreso;
-	protected float sueldoBase;
-	protected LocalDate fechaEgreso;
-	private Festival festival;
+public class Persona {
+	private long idPersona;
+	private int dni;
+	private String nombre;
+	private String apellido;
+	private LocalDate fechaNacimiento;
+	private LocalDate fechaIngreso;
+	private float sueldoBase;
+	private LocalDate fechaEgreso;
 	private UnidadVenta unidadVenta;
 
 
@@ -20,7 +20,7 @@ public abstract class Persona {
 	}
 
 	public Persona(int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
+			float sueldoBase, LocalDate fechaEgreso) throws Exception {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -29,14 +29,13 @@ public abstract class Persona {
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
 		this.fechaEgreso = fechaEgreso;
-		this.festival = festival;
 	}
 
 	public long getIdPersona() {
 		return idPersona;
 	}
 
-	// siempre va protected, para que no sea modificado
+	//va protected, para que no sea modificado
 	protected void setIdPersona(long idPersona) {
 		this.idPersona = idPersona;
 	}
@@ -99,20 +98,16 @@ public abstract class Persona {
 		this.fechaEgreso = fechaEgreso;
 	}
 	
-	public Festival getFestival() {
-	    return festival;
-	}
-
-	public void setFestival(Festival festival) {
-	    this.festival = festival;
-	}
-	
 	public UnidadVenta getUnidadVenta() {
 		return unidadVenta;
 	}
 
 	public void setUnidadVenta(UnidadVenta unidadVenta) {
 		this.unidadVenta = unidadVenta;
+	}
+	
+	public int hashCode() {
+		return Objects.hash(dni);
 	}
 
 	public boolean equals(Persona p) {
@@ -121,9 +116,9 @@ public abstract class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + ", fechaIngreso=" + fechaIngreso + ", sueldoBase=" + sueldoBase + ", fechaEgreso="
-				+ fechaEgreso + "]";
+		return "Persona [idPersona=" + idPersona + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", fechaNacimiento=" + fechaNacimiento + ", fechaIngreso=" + fechaIngreso + ", sueldoBase="
+				+ sueldoBase + ", fechaEgreso=" + fechaEgreso + "]";
 	}
 
 }

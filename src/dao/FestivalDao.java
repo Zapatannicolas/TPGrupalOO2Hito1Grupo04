@@ -115,6 +115,8 @@ public class FestivalDao {
 		}
 		return objeto;
 	}
+	
+	//modificar
 
 	public Festival traerFestivalYPedidos(long idFestival) throws HibernateException {
 		Festival objeto = null;
