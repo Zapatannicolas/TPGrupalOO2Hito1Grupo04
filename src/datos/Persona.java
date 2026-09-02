@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 public class Persona {
@@ -12,7 +13,6 @@ public class Persona {
 	private LocalDate fechaIngreso;
 	private float sueldoBase;
 	private LocalDate fechaEgreso;
-	private Festival festival;
 	private UnidadVenta unidadVenta;
 
 
@@ -20,7 +20,7 @@ public class Persona {
 	}
 
 	public Persona(int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
+			float sueldoBase, LocalDate fechaEgreso) throws Exception {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -29,7 +29,6 @@ public class Persona {
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
 		this.fechaEgreso = fechaEgreso;
-		this.festival = festival;
 	}
 
 	public long getIdPersona() {
@@ -99,20 +98,16 @@ public class Persona {
 		this.fechaEgreso = fechaEgreso;
 	}
 	
-	public Festival getFestival() {
-	    return festival;
-	}
-
-	public void setFestival(Festival festival) {
-	    this.festival = festival;
-	}
-	
 	public UnidadVenta getUnidadVenta() {
 		return unidadVenta;
 	}
 
 	public void setUnidadVenta(UnidadVenta unidadVenta) {
 		this.unidadVenta = unidadVenta;
+	}
+	
+	public int hashCode() {
+		return Objects.hash(dni);
 	}
 
 	public boolean equals(Persona p) {
@@ -121,9 +116,9 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + ", fechaIngreso=" + fechaIngreso + ", sueldoBase=" + sueldoBase + ", fechaEgreso="
-				+ fechaEgreso + "]";
+		return "Persona [idPersona=" + idPersona + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", fechaNacimiento=" + fechaNacimiento + ", fechaIngreso=" + fechaIngreso + ", sueldoBase="
+				+ sueldoBase + ", fechaEgreso=" + fechaEgreso + "]";
 	}
 
 }

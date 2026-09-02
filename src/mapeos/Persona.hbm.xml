@@ -22,11 +22,6 @@
 
 		<!-- Relacion con listas (otras clases) -->
 		
-		<!-- Sacar esta relacion -->
-		<many-to-one name="festival" class="datos.Festival" column="idFestival"
-			not-null="true" />
-		<!-- Sacar esta relacion -->
-		
 		<many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta"
 			not-null="false" />
 
