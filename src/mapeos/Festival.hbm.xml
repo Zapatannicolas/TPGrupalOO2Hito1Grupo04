@@ -21,6 +21,18 @@
 
 		<property name="fechaFin" column="fechaFin" type="LocalDate"
 			not-null="true" />
+		
+		<property name="costoSuperficie" column="costoSuperficie"
+			type="double" not-null="true" />
+
+		<property name="costoMontaje" column="costoMontaje"
+			type="double" not-null="true" />
+
+		<property name="plusElectricidad" column="plusElectricidad"
+			type="double" not-null="true" />
+
+		<property name="sueldoBase" column="sueldoBase"
+			type="double" not-null="true" />
 
 		<!-- Relacion con listas (otras clases) -->
 		<set name="unidadesVenta" table="unidadventas">

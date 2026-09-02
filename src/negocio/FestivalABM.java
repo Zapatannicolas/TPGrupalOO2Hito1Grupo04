@@ -18,13 +18,19 @@ public class FestivalABM {
 		return dao.traer(nombre);
 	}
 
-	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
+	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin,
+			double costoSuperficie, double costoMontaje, double plusElectricidad, double sueldoBase) {
+
 		Festival f = new Festival();
 
 		f.setNombre(nombre);
 		f.setTemporada(temporada);
 		f.setFechaInicio(fechaInicio);
 		f.setFechaFin(fechaFin);
+		f.setCostoSuperficie(costoSuperficie);
+		f.setCostoMontaje(costoMontaje);
+		f.setPlusElectricidad(plusElectricidad);
+		f.setSueldoBase(sueldoBase);
 
 		return dao.agregar(f);
 	}
