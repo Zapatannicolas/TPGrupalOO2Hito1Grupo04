@@ -6,8 +6,8 @@ public class PuestoDesarmable extends UnidadVenta{
 	
 	public PuestoDesarmable() {};
 	
-	public PuestoDesarmable(String nombreComercial, double superficie, String codigoUnico, Persona responsable, int cantidad, int tiempoMontaje) {
-		super(nombreComercial,superficie,codigoUnico,responsable);
+	public PuestoDesarmable(String nombreComercial, double superficie, String codigoUnico, Persona responsable, Festival festival,int cantidad, int tiempoMontaje) {
+		super(nombreComercial,superficie,codigoUnico,responsable, festival);
 		this.cantidad = cantidad;
 		this.tiempoMontaje = tiempoMontaje;
 	}
@@ -27,6 +27,7 @@ public class PuestoDesarmable extends UnidadVenta{
 	public void setTiempoMontaje(int tiempoMontaje) {
 		this.tiempoMontaje = tiempoMontaje;
 	}
+
 
 	@Override
 	public String toString() {

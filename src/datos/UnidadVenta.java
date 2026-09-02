@@ -1,5 +1,6 @@
 package datos;
 
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class UnidadVenta {
@@ -12,18 +13,32 @@ public abstract class UnidadVenta {
 	private Set<Persona> staff;
 	private Set<Plato> platos;
 	private Set<Pedido> pedidos;
-
+    private Festival festival;
+    
+    
 	public UnidadVenta() {}
-
 	
 	
-	public UnidadVenta(String nombreComercial, double superficie, String codigoUnico, Persona responsable) {
+	public UnidadVenta(String nombreComercial, double superficie, String codigoUnico, Persona responsable, Festival festival) {
 		super();
 		this.nombreComercial = nombreComercial;
 		this.superficie = superficie;
 		this.codigoUnico = codigoUnico;
 		this.responsable = responsable;
+		this.festival = festival;
 	}
+
+
+	public Festival getFestival() {
+		return festival;
+	}
+
+
+
+	public void setFestival(Festival festival) {
+		this.festival = festival;
+	}
+
 
 
 	public long getIdUnidadVenta() {
@@ -89,6 +104,27 @@ public abstract class UnidadVenta {
 	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigoUnico);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadVenta other = (UnidadVenta) obj;
+		return Objects.equals(codigoUnico, other.codigoUnico);
+	}
+
 
 
 	@Override

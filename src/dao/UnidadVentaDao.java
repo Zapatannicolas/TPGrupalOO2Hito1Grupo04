@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -7,6 +8,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Pedido;
+import datos.Persona;
 import datos.UnidadVenta;
 
 public class UnidadVentaDao{
@@ -24,8 +27,6 @@ public class UnidadVentaDao{
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 	
-/*  LE HACEMOS EL NORMAL O PATRON SINGLETON??¿¿*/
-
 	public int agregar(UnidadVenta objeto) {
 		int id = 0;
 		try {
@@ -116,5 +117,76 @@ public class UnidadVentaDao{
         }
         return objeto;
     }
+    
+    public UnidadVenta traerUnidadVentaYStaff(long idUnidadVenta) throws HibernateException {
+        UnidadVenta objeto = null;
+        try {
+            iniciaOperacion();            
+            String hql = "from UnidadVenta u where u.idUnidadVenta=:idUnidadVenta";            
+            objeto=(UnidadVenta) session.createQuery(hql).setParameter("idUnidadVenta", idUnidadVenta).uniqueResult();
+            Hibernate.initialize(objeto.getStaff());
+        }
+ 		finally {
+ 			session.close();
+        }
+        return objeto;
+    }
+    
+    public void agregarStaffAUnidadVenta(UnidadVenta unidadVenta, Persona persona) throws HibernateException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+
+            // 1. Asignamos la FK en la persona
+            persona.setUnidadVenta(unidadVenta);
+            session.update(persona);
+
+            // 2. Traemos/Refrescamos la UnidadVenta en ESTA sesión
+            UnidadVenta uvPersistent = (UnidadVenta) session.get(UnidadVenta.class, unidadVenta.getIdUnidadVenta());
+            
+            // 3. Inicializamos el proxy de la colección staff
+            Hibernate.initialize(uvPersistent.getStaff());
+
+            // 4. Ahora sí podemos agregar el elemento a la colección cargada
+            uvPersistent.getStaff().add(persona);
+
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void agregarPedidosAUnidadVenta(UnidadVenta unidadVenta, Pedido pedido) throws HibernateException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+
+            // 1. Asignamos la FK en la persona
+            pedido.setUnidadVenta(unidadVenta);
+            session.update(pedido);
+
+            // 2. Traemos/Refrescamos la UnidadVenta en ESTA sesión
+            UnidadVenta uvPersistent = (UnidadVenta) session.get(UnidadVenta.class, unidadVenta.getIdUnidadVenta());
+            
+            // 3. Inicializamos el proxy de la colección staff
+            Hibernate.initialize(uvPersistent.getPedidos());
+
+            // 4. Ahora sí podemos agregar el elemento a la colección cargada
+            uvPersistent.getPedidos().add(pedido);
+
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
     
 }
