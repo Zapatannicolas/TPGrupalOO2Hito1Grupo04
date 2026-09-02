@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Objects;
+
 public class Plato {
 	private int idPlato;
 	private String nombre;
@@ -57,13 +59,22 @@ public class Plato {
 		this.unidadVenta = unidadVenta;
 	}
 
+	
+	
 	@Override
-	public String toString() {
-		return "Plato [idPlato=" + idPlato + ", nombre=" + nombre + ", precio=" + precio + ", costo=" + costo + "]";
+	public int hashCode() {
+		return Objects.hash(Float.valueOf(costo), Integer.valueOf(idPlato), nombre, Float.valueOf(precio), unidadVenta);
 	}
 
 	// Equals
 	public boolean equals(Plato plato) {
-		return (plato.getNombre().equalsIgnoreCase(this.nombre) && plato.getPrecio() == this.precio);
+		return (plato.getNombre().equalsIgnoreCase(this.nombre) 
+				&& plato.getPrecio() == this.precio 
+				&& plato.getCosto() == this.costo);
+	}
+
+	@Override
+	public String toString() {
+		return "Plato [idPlato=" + idPlato + ", nombre=" + nombre + ", precio=" + precio + ", costo=" + costo + "]";
 	}
 }

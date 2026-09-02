@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Objects;
+
 public class ItemPedido {
 	private int idItemPedido;
 	private Plato plato;
@@ -49,7 +51,18 @@ public class ItemPedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+	
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(Integer.valueOf(cantidad), Integer.valueOf(idItemPedido), pedido, plato);
+	}
+
+	// Equals
+	public boolean equals(ItemPedido item) {
+		return (item.getPlato().equals(this.plato) && item.getPedido().equals(this.pedido));
+	}
+	
 	@Override
 	public String toString() {
 		return "ItemPedido [idItemPedido=" + idItemPedido + ", plato=" + plato + ", cantidad=" + cantidad + "]";

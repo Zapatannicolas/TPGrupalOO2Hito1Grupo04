@@ -1,32 +1,29 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import datos.Pedido;
+import datos.ItemPedido;
 
-public class PedidoDao {
+public class ItemPedidoDao {
 
 	private static Session session;
 	private Transaction tx;
-	
+
 	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-	
+
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
-	
-	
-	public int agregar(Pedido objeto) {
+
+	public int agregar(ItemPedido objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -34,60 +31,60 @@ public class PedidoDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
+			throw he;
 		} finally {
 			session.close();
 		}
 		return id;
 	}
-	
-	
-	public void actualizar(Pedido objeto) {
+
+	public void actualizar(ItemPedido objeto) {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
+			throw he;
 		} finally {
 			session.close();
 		}
 	}
-	
-	
-	public void eliminar(Pedido objeto) {
+
+	public void eliminar(ItemPedido objeto) {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
+			throw he;
 		} finally {
 			session.close();
 		}
 	}
-	
-	
-	public Pedido traer(int idPedido) {
-		Pedido objeto = null;
+
+	public ItemPedido traer(int idItemPedido) {
+		ItemPedido objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Pedido) session.get(Pedido.class, idPedido);
+			objeto = (ItemPedido) session.get(ItemPedido.class, idItemPedido);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	
-	public List<Pedido> traer() {
-		List<Pedido> lista = new ArrayList<Pedido>();
+
+	public List<ItemPedido> traer() throws HibernateException {
+		List<ItemPedido> lista = null;
 		try {
 			iniciaOperacion();
-			Query<Pedido> query = session.createQuery("from Pedido p order by p.fecha asc", Pedido.class);
-			lista = query.getResultList();
+			lista = session.createQuery("from ItemPedido i order by i.cantidad asc", ItemPedido.class).getResultList();
 		} finally {
 			session.close();
 		}
 		return lista;
 	}
+	
 }
