@@ -3,28 +3,30 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import datos.Persona;
+import datos.UnidadVenta;
 
 public class PersonaDao {
 	private static Session session;
 	private Transaction tx;
-	
+
 	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-	
+
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		//throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		// throw new HibernateException("ERROR en la capa de acceso a datos", he);
 		he.printStackTrace();
 	}
-	
+
 	public int agregar(Persona objeto) {
 		int id = 0;
 		try {
@@ -38,7 +40,7 @@ public class PersonaDao {
 		}
 		return id;
 	}
-	
+
 	public void actualizar(Persona objeto) {
 		try {
 			iniciaOperacion();
@@ -50,7 +52,7 @@ public class PersonaDao {
 			session.close();
 		}
 	}
-	
+
 	public void eliminar(Persona objeto) {
 		try {
 			iniciaOperacion();
@@ -62,7 +64,7 @@ public class PersonaDao {
 			session.close();
 		}
 	}
-	
+
 	public Persona traer(long idPersona) {
 		Persona objeto = null;
 		try {
@@ -73,7 +75,7 @@ public class PersonaDao {
 		}
 		return objeto;
 	}
-	
+
 	public List<Persona> traer() {
 		List<Persona> lista = new ArrayList<Persona>();
 		try {
@@ -85,6 +87,20 @@ public class PersonaDao {
 			session.close();
 		}
 		return lista;
+	}
+
+	public Persona traerPersonaYUnidadDeVenta(long idPersona) {
+		Persona objeto = null;
+	        try {
+	            iniciaOperacion();            
+	            String hql = "from Persona p where p.idPersona=:idPersona";            
+	            objeto=(Persona) session.createQuery(hql).setParameter("idPersona", idPersona).uniqueResult();
+	            Hibernate.initialize(objeto.getUnidadVenta());
+	        }
+	 		finally {
+	 			session.close();
+	        }
+	        return objeto;
 	}
 
 }

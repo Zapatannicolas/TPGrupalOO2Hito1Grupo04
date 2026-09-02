@@ -9,9 +9,9 @@ public class Cajero extends Persona{
 	}
 
 
-	public Cajero(String turno, int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, LocalDate fechaEgreso, Festival festival) throws Exception {
-		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso, festival);
+	public Cajero(int dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso,
+			float sueldoBase, LocalDate fechaEgreso, String turno) throws Exception {
+		super(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, fechaEgreso);
 		this.turno = turno;
 	}
 

@@ -7,7 +7,6 @@ import dao.PersonaDao;
 import datos.Cajero;
 import datos.Cocinero;
 import datos.Persona;
-import datos.UnidadVenta;
 
 public class PersonaABM {
 	PersonaDao dao = new PersonaDao();
@@ -16,12 +15,28 @@ public class PersonaABM {
 		return dao.traer(idPersona);
 	}
 
-	public int agregar(Persona persona)throws Exception {
-		if(validarDni(persona.getDni()) == true)throw new Exception("Esta persona ya existe");
+	public int agregarCajero(int dni, String nombre,  String apellido,  LocalDate fechaNacimiento, 
+			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String turno)throws Exception {
+		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
 		
-		this.calcularSueldo(persona);
+		Persona cajero = new Cajero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, turno);
 		
-		return dao.agregar(persona);
+		this.calcularSueldo(cajero);
+		
+		return dao.agregar(cajero);
+	}
+	
+	public int agregarCocinero(int dni, String nombre,  String apellido,  LocalDate fechaNacimiento, 
+			LocalDate fechaIngreso, float sueldoBase, LocalDate fechaEgreso, String especialidad, int plusCategoria)throws Exception {
+		if(validarDni(dni) == true)throw new Exception("Esta persona ya existe");
+		
+		Persona cocinero = new Cocinero(dni, nombre, apellido, fechaNacimiento, fechaIngreso, sueldoBase, 
+				fechaEgreso, especialidad, plusCategoria);
+		
+		this.calcularSueldo(cocinero);
+		
+		return dao.agregar(cocinero);
 	}
 	
 	private boolean validarDni(int dni) {
@@ -39,7 +54,6 @@ public class PersonaABM {
 	}
 
 	public void modificar(Persona persona) throws Exception {
-		if(validarDni(persona.getDni()) == true)throw new Exception("Esta persona ya existe");
 		dao.actualizar(persona);
 	}
 
@@ -53,6 +67,10 @@ public class PersonaABM {
 		return dao.traer();
 	}
 	
+	public Persona traerPersonaYUnidadDeVenta(long idPersona) {
+		return dao.traerPersonaYUnidadDeVenta(idPersona);
+	}
+	
 	private void calcularSueldo(Persona objeto) {
 		
 		if(objeto instanceof Cajero) {
@@ -63,6 +81,8 @@ public class PersonaABM {
 		}
 	}
 	
+	
+	
 	private float calcularAntiguedad(Persona objeto) {
 		
 		long diasIngreso = objeto.getFechaIngreso().toEpochDay();
@@ -71,11 +91,5 @@ public class PersonaABM {
         return (diasActual - diasIngreso) / 365;
 	}
 	
-	public void agregarPersonal(UnidadVenta unidadVenta, long idPersonal) throws Exception{
-		Persona persona = dao.traer(idPersonal);
-		
-		persona.setUnidadVenta(unidadVenta);
-		
-		dao.actualizar(persona);
-	}
+	
 }
