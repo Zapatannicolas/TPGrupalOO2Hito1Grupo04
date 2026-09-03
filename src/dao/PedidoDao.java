@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import datos.ItemPedido;
 import datos.Pedido;
 
 public class PedidoDao {
@@ -89,5 +90,24 @@ public class PedidoDao {
 			session.close();
 		}
 		return lista;
+	}
+	
+	
+	// Consulta HQL
+	// Traer lista items por pedido.
+	public List<ItemPedido> traerItems(int idPedido) {
+	    List<ItemPedido> lista = new ArrayList<ItemPedido>();
+	    
+	    try {
+	        iniciaOperacion();
+
+	        Query<ItemPedido> query = session.createQuery("from ItemPedido i " + "join fetch i.plato " + "where i.pedido.idPedido = :idPedido", ItemPedido.class);
+	        query.setParameter("idPedido", idPedido);
+	        lista = query.getResultList();
+
+	    } finally {
+	        session.close();
+	    }
+	    return lista;
 	}
 }
