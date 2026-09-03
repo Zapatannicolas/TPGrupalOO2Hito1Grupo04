@@ -95,7 +95,7 @@ public class PedidoDao {
 	
 	// Consulta HQL
 	// Traer lista items por pedido.
-	public List<ItemPedido> traerItems(int idPedido) {
+	public List<ItemPedido> traerItemsPorPedido(int idPedido) {
 	    List<ItemPedido> lista = new ArrayList<ItemPedido>();
 	    
 	    try {
