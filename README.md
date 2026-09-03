@@ -18,5 +18,5 @@
 
 - Jose Ignacio Aldonate:
 - Maximiliano Omar Bruni:
-- Rodrigo Gabriel Velazquez:
+- Rodrigo Gabriel Velazquez: 1- public List<Cocinero> traerCocinerosEntreFechas (); 2- public List<ItemPedido> traerItemsPorPedido();
 - Nicolás Alberto Zapata: 
