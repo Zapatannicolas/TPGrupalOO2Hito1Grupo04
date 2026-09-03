@@ -17,6 +17,6 @@
 ## Responsable y Caso de uso realizado: 
 
 - Jose Ignacio Aldonate:
-- Maximiliano Omar Bruni:
+- Maximiliano Omar Bruni: 1-  public List<Cocinero> traerCocineroPorIngreso(long idUnidadVenta, LocalDate fecha);
 - Rodrigo Gabriel Velazquez: 1- public List<Cocinero> traerCocinerosEntreFechas (); 2- public List<ItemPedido> traerItemsPorPedido();
 - Nicolás Alberto Zapata: 
