@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Cajero;
+import datos.Cocinero;
 import datos.Pedido;
 import datos.Persona;
 import datos.UnidadVenta;
@@ -188,5 +191,60 @@ public class UnidadVentaDao{
         }
     }
     
+    
+    public List<Cajero> traerCajerosPorSueldo(long idUnidadVenta, float sueldo) throws HibernateException {
+
+        List<Cajero> lista = null;
+
+        try {
+
+            iniciaOperacion();
+
+            String hql = "from Cajero c "
+                    + "where c.unidadVenta.idUnidadVenta = :idUnidadVenta "
+                    + "and c.sueldoBase > :sueldo";
+
+            lista = session.createQuery(hql, Cajero.class)
+                    .setParameter("idUnidadVenta", idUnidadVenta)
+                    .setParameter("sueldo", sueldo)
+                    .list();
+
+        } finally
+        
+        {
+
+            session.close();
+
+        }
+        return lista;
+    }
+    
+        
+        public List<Cocinero> traerCocineroPorIngreso(long idUnidadVenta, LocalDate fecha)
+                throws HibernateException {
+
+            List<Cocinero> lista = null;
+
+            try {
+
+                iniciaOperacion();
+
+                String hql = "from Cocinero c "
+                        + "where c.unidadVenta.idUnidadVenta = :idUnidadVenta "
+                        + "and c.fechaIngreso > :fecha";
+
+                lista = session.createQuery(hql, Cocinero.class)
+                        .setParameter("idUnidadVenta", idUnidadVenta)
+                        .setParameter("fecha", fecha)
+                        .list();
+
+            } finally {
+
+                session.close();
+
+            }
+
+        return lista;
+    }
     
 }
