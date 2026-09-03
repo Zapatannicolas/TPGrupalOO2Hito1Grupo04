@@ -90,6 +90,11 @@ public class PersonaABM {
 
         return (diasActual - diasIngreso) / 365;
 	}
+
 	
-	
+	// Consulta HQL
+	// Traer Cocineros entre fechas teniendo en cuenta el ingreso.
+	public List<Cocinero> traerCocinerosEntreFechas(LocalDate desde, LocalDate hasta) {
+	    return dao.traerCocinerosEntreFechas(desde, hasta);
+	}
 }
