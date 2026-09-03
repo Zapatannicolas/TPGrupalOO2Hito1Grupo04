@@ -35,7 +35,7 @@
 			type="double" not-null="true" />
 
 		<!-- Relacion con listas (otras clases) -->
-		<set name="unidadesVenta" table="unidadventas">
+		<set name="unidadesVenta" table="unidadventa">
 			<key column="idFestival" />
 			<one-to-many class="datos.UnidadVenta" />
 		</set>
