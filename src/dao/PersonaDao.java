@@ -103,4 +103,29 @@ public class PersonaDao {
 	        return objeto;
 	}
 
+	// Consulta HQL
+	public List<Cocinero> traerCocinerosEntreFechas(LocalDate desde, LocalDate hasta) {
+	    List<Cocinero> lista = new ArrayList<Cocinero>();
+
+	    try {
+	        iniciaOperacion();
+
+	        Query<Cocinero> query = session.createQuery(
+	            "from Cocinero c " +
+	            "where c.fechaIngreso between :desde and :hasta " +
+	            "order by c.apellido asc, c.nombre asc",
+	            Cocinero.class
+	        );
+
+	        query.setParameter("desde", desde);
+	        query.setParameter("hasta", hasta);
+
+	        lista = query.getResultList();
+
+	    } finally {
+	        session.close();
+	    }
+
+	    return lista;
+	}
 }
