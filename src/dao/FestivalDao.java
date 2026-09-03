@@ -116,4 +116,23 @@ public class FestivalDao {
 		return objeto;
 	}
 	
+	public Long cantidadFoodTrucks(long idFestival) {
+	    try {
+	        iniciaOperacion();
+
+	        String hql = "select count(u) "
+	                   + "from Festival f "
+	                   + "join f.unidadesVenta u "
+	                   + "where f.id = :idFestival "
+	                   + "and type(u) = FoodTruck";
+
+	        return (Long) session.createQuery(hql)
+	                .setParameter("idFestival", idFestival)
+	                .uniqueResult();
+
+	    } finally {
+	        session.close();
+	    }
+	}
+	
 }
