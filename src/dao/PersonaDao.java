@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import datos.Cocinero;
 import datos.Persona;
-import datos.UnidadVenta;
 
 public class PersonaDao {
 	private static Session session;
@@ -102,7 +103,8 @@ public class PersonaDao {
 	        }
 	        return objeto;
 	}
-
+	
+	
 	// Consulta HQL
 	public List<Cocinero> traerCocinerosEntreFechas(LocalDate desde, LocalDate hasta) {
 	    List<Cocinero> lista = new ArrayList<Cocinero>();
