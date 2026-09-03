@@ -6,7 +6,9 @@ import java.util.List;
 
 import datos.Cajero;
 import datos.Cocinero;
+import datos.Festival;
 import datos.Persona;
+import negocio.FestivalABM;
 import negocio.PersonaABM;
 import negocio.UnidadVentaAbm;
 
@@ -19,6 +21,7 @@ public class TestCU {
 		List<Cocinero> cocinero = new ArrayList<>();
 
 		List<Cajero> cajero = new ArrayList<>();
+		FestivalABM festivalABM = new FestivalABM();
 		
 		//Nacho CU
 		//Trae listas de cajeros filtrados cuyo sueldo sea mayor al sueldo base ingresado por parametro
@@ -49,6 +52,17 @@ public class TestCU {
             System.out.println("DNI        : " + c.getDni());
             System.out.println("Ingreso        : " + c.getFechaIngreso());
 		}
+		
+		
+		// Nico CU
+		// Trae cantidad de Foodtrucks que tiene un Festival
+		Festival festival = festivalABM.traer(1L);
+		System.out.println("\nCU NICOLAS: ");
+		System.out.println("------------------------------------------");
+		System.out.println("Food Trucks: " + festivalABM.cantidadFoodTrucks(1L));
+		System.out.println("Festival: " + festival.getNombre());
+
+		
 	}
 
 }

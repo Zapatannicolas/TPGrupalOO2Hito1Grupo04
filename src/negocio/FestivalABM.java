@@ -51,6 +51,10 @@ public class FestivalABM {
 	public Festival traerFestivalYUnidades(long id) {
 		return dao.traerFestivalYUnidades(id);
 	}
+	
+	public Long cantidadFoodTrucks(long idFestival) {
+	    return dao.cantidadFoodTrucks(idFestival);
+	}
 
 	
 }
