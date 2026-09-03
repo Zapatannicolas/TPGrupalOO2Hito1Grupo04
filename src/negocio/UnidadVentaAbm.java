@@ -5,6 +5,8 @@ import java.util.List;
 
 import dao.UnidadVentaDao;
 import datos.UnidadVenta;
+import datos.Cajero;
+import datos.Cocinero;
 import datos.Festival;
 import datos.FoodTruck;
 import datos.Pedido;
@@ -81,5 +83,16 @@ public class UnidadVentaAbm {
 	    // Llamamos al DAO para que agregue a la lista en memoria y actualice la BD
 	    dao.agregarPedidosAUnidadVenta(unidadVenta, pedido);
 	}
+	
+	public List<Cajero> traerCajerosPorSueldo(long idUnidadVenta, float sueldo) {
+
+        return dao.traerCajerosPorSueldo(idUnidadVenta, sueldo);
+
+    }
+	
+	 public List<Cocinero> traerCocineroPorIngreso(long idUnidadVenta, LocalDate fecha){
+		 
+		 return dao.traerCocineroPorIngreso(idUnidadVenta, fecha);
+	 }
 	
 }
