@@ -14,7 +14,7 @@
 	    <property name="codigoUnico" column="codigoUnico" type="string" not-null="true"/>
 
 		<!-- Relacion con listas (otras clases) -->
-	    <many-to-one name="responsable" class="datos.Persona" column="idPersonaResponsable" not-null="true" unique="true"/>
+	    <many-to-one name="responsable" class="datos.Persona" column="idPersonaResponsable" not-null="false" unique="true"/>
                 
         
         <set name="staff" table="persona" order-by="idPersona asc" inverse="true" lazy="true" fetch="select">
