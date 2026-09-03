@@ -1,5 +1,6 @@
 package negocio;
 	
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.PedidoDao;
@@ -8,6 +9,7 @@ import dao.ItemPedidoDao;
 import datos.ItemPedido;
 import datos.Pedido;
 import datos.Plato;
+import datos.UnidadVenta;
 
 public class PedidoABM {
 	
@@ -19,16 +21,13 @@ public class PedidoABM {
 	}
 
 	
-	public int agregar(Pedido pedido) throws Exception {
+	public int agregarPedido(LocalDate fecha, UnidadVenta unidadVenta) throws Exception {
 
-		// Evitamos un NullPointerException.
-	    if (pedido == null) {
-	        throw new Exception("El pedido no existe");
-	    }
-
-	    if (pedido.getUnidadVenta() == null) {
+	    if (unidadVenta == null) {
 	        throw new Exception("La unidad de venta no existe");
 	    }
+
+	    Pedido pedido = new Pedido(fecha, unidadVenta);
 
 	    return dao.agregar(pedido);
 	}
@@ -102,5 +101,15 @@ public class PedidoABM {
         }
     	
     	itemDao.eliminar(item);
+    }
+    
+    
+    // Consulta HQL
+    public List<ItemPedido> traerItemsPorPedido(int idPedido) throws Exception {
+
+        if (dao.traer(idPedido) == null) {
+            throw new Exception("El pedido no existe");
+        }
+        return dao.traerItemsPorPedido(idPedido);
     }
 }
