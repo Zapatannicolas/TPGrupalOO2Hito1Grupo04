@@ -12,7 +12,11 @@
 - Nicolás Alberto Zapata - Zapatannicolas
 
 ## Diagrama de Clases:
+
 <img width="2534" height="2304" alt="Diagrama de Clase drawio (1)" src="https://github.com/user-attachments/assets/9015305c-daa9-4ae5-8350-d54e11cb45ad" />
+
+<img width="2534" height="2304" alt="grupo4 drawio" src="https://github.com/user-attachments/assets/f93449c6-e2ef-412f-9a92-a15e1894b225" />
+
 
 ## Responsable y Caso de uso realizado: 
 
