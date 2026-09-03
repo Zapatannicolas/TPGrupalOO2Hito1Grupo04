@@ -16,7 +16,7 @@
 
 ## Responsable y Caso de uso realizado: 
 
-- Jose Ignacio Aldonate:
+- Jose Ignacio Aldonate: 1- public List<Cajero> traerCajerosPorSueldo(long idUnidadVenta, float sueldo); 
 - Maximiliano Omar Bruni: 1-  public List<Cocinero> traerCocineroPorIngreso(long idUnidadVenta, LocalDate fecha);
 - Rodrigo Gabriel Velazquez: 1- public List<Cocinero> traerCocinerosEntreFechas (); 2- public List<ItemPedido> traerItemsPorPedido();
 - Nicolás Alberto Zapata: 
