@@ -3,6 +3,7 @@ package negocio;
 import java.util.List;
 import dao.PlatoDao;
 import datos.Plato;
+import datos.UnidadVenta;
 
 public class PlatoABM {
 	PlatoDao dao = new PlatoDao();
@@ -10,18 +11,17 @@ public class PlatoABM {
 	public Plato traer(int idPlato) {
 		return dao.traer(idPlato);
 	}
+	
 
-	public int agregar(Plato plato)throws Exception {
-		
-	    if (plato == null) {
-	        throw new Exception("El plato no existe");
-	    }
+	public int agregarPlato(String nombre, float precio, float costo, UnidadVenta unidadVenta) throws Exception {
 
-	    if (plato.getUnidadVenta() == null) {
+	    if (unidadVenta == null) {
 	        throw new Exception("La unidad de venta no existe");
 	    }
-		
-		return dao.agregar(plato);
+
+	    Plato plato = new Plato(nombre, precio, costo, unidadVenta);
+
+	    return dao.agregar(plato);
 	}
 		
 	
