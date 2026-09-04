@@ -65,6 +65,7 @@ public class ItemPedido {
 	
 	@Override
 	public String toString() {
-		return "ItemPedido [idItemPedido=" + idItemPedido + ", plato=" + plato + ", cantidad=" + cantidad + "]";
+		return "ItemPedido [idItemPedido=" + idItemPedido + ", plato=" + plato + ", cantidad=" + cantidad + ", pedido="
+				+ pedido + "]";
 	}
 }
