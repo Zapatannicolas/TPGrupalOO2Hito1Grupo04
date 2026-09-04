@@ -21,12 +21,18 @@ public class Festival {
     	
     }
     
-	public Festival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
+
+	public Festival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin, double costoSuperficie,
+			double costoMontaje, double plusElectricidad, double sueldoBase) {
 		super();
 		this.nombre = nombre;
 		this.temporada = temporada;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.costoSuperficie = costoSuperficie;
+		this.costoMontaje = costoMontaje;
+		this.plusElectricidad = plusElectricidad;
+		this.sueldoBase = sueldoBase;
 	}
 
 	public Long getId() {
@@ -115,8 +121,7 @@ public class Festival {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Double.valueOf(costoMontaje), Double.valueOf(costoSuperficie), fechaFin, fechaInicio, id,
-				nombre, Double.valueOf(plusElectricidad), Double.valueOf(sueldoBase), temporada, unidadesVenta);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -128,13 +133,7 @@ public class Festival {
 		if (getClass() != obj.getClass())
 			return false;
 		Festival other = (Festival) obj;
-		return Double.doubleToLongBits(costoMontaje) == Double.doubleToLongBits(other.costoMontaje)
-				&& Double.doubleToLongBits(costoSuperficie) == Double.doubleToLongBits(other.costoSuperficie)
-				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
-				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
-				&& Double.doubleToLongBits(plusElectricidad) == Double.doubleToLongBits(other.plusElectricidad)
-				&& Double.doubleToLongBits(sueldoBase) == Double.doubleToLongBits(other.sueldoBase)
-				&& Objects.equals(temporada, other.temporada) && Objects.equals(unidadesVenta, other.unidadesVenta);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override

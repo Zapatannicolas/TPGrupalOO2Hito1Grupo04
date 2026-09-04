@@ -1,10 +1,9 @@
 package negocio;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import dao.FestivalDao;
 import datos.Festival;
+
 
 public class FestivalABM {
 
@@ -19,22 +18,14 @@ public class FestivalABM {
 	}
 
 	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin,
-			double costoSuperficie, double costoMontaje, double plusElectricidad, double sueldoBase) {
+            double costoSuperficie, double costoMontaje, double plusElectricidad, double sueldoBase) {
 
-		Festival f = new Festival();
+		Festival festival = new Festival(nombre, temporada, fechaInicio, fechaFin, costoSuperficie, costoMontaje, plusElectricidad, sueldoBase);
 
-		f.setNombre(nombre);
-		f.setTemporada(temporada);
-		f.setFechaInicio(fechaInicio);
-		f.setFechaFin(fechaFin);
-		f.setCostoSuperficie(costoSuperficie);
-		f.setCostoMontaje(costoMontaje);
-		f.setPlusElectricidad(plusElectricidad);
-		f.setSueldoBase(sueldoBase);
-
-		return dao.agregar(f);
+		return dao.agregar(festival);
 	}
-
+	
+	
 	public void modificar(Festival f) {
 		dao.actualizar(f);
 	}
